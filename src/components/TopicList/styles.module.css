@@ -1,0 +1,18 @@
+.topic_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .topic_list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    justify-content: center;
+  }
+}

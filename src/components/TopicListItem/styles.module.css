@@ -1,0 +1,41 @@
+.item_wrapper {
+  width: 400px;
+  gap: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+
+  border: 1px solid rgb(90, 82, 82);
+  border-radius: 8px;
+}
+
+.item_wrapper p {
+  width: 100%;
+}
+
+.vote_wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.vote_button {
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.meter {
+  height: 30px;
+  width: 200px;
+}
+
+@media (max-width: 700px) {
+  .item_wrapper {
+    width: 350px;
+    align-self: center;
+  }
+}
