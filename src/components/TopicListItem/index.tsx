@@ -29,8 +29,8 @@ export function TopicListItem({ topic }: TopicListItemProps) {
       <div className={styles.vote_wrapper}>
         <input
           type="button"
-          value="Like"
-          onClick={handleLikes}
+          value="Dislike"
+          onClick={handleDislike}
           className={styles.vote_button}
         />
         <meter
@@ -41,8 +41,8 @@ export function TopicListItem({ topic }: TopicListItemProps) {
         ></meter>
         <input
           type="button"
-          value="Dislike"
-          onClick={handleDislike}
+          value="Like"
+          onClick={handleLikes}
           className={styles.vote_button}
         />
       </div>
