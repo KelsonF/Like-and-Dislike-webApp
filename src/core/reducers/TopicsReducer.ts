@@ -6,30 +6,24 @@ export interface TopicState {
 }
 
 export enum ActionType {
-     Added
+     Added,
+     Loaded
 }
 
-type TopicAdded = { type: ActionType.Added, payload: { description: string } }
+type TopicAdded = { type: ActionType.Added, payload: { topic: Topic } }
+type TopicLoaded = { type: ActionType.Loaded, payload: { topics: Topic[] } }
 
-const TopicsReducer = (state: TopicState, action: TopicAdded): TopicState => {
+type Action = TopicAdded | TopicLoaded
 
-     const new_topic = {
-          id: ulid(),
-          created_at: new Date().toJSON().slice(0, 10),
-          active: true,
-          description: action.payload.description,
-          upvote: 0,
-          downvote: 0,
-          tags: ["teste", "teste2"],
-          autor: {
-               id: "id_teste",
-               name: "Kelson",
-               country: "Brazil",
-               city: "Teresina",
-          },
-     };
-
-     return { topics: [new_topic, ...state.topics] }
+const TopicsReducer = (state: TopicState, action: Action): TopicState => {
+     switch (action.type) {
+          case ActionType.Added: {
+               return { topics: [action.payload.topic, ...state.topics] }
+          }
+          case ActionType.Loaded: {
+               return { topics: [...action.payload.topics] }
+          }
+     }
 }
 
 export { TopicsReducer }
