@@ -1,24 +1,27 @@
 import styles from "./styles.module.css";
 import { Topic } from "../../core/interfaces/Topic";
-import { useState } from "react";
+import { useReducer } from "react";
+import { ActionType, voteReducer } from "../../core/reducers/LikesReducer";
 
 interface TopicListItemProps {
   topic: Topic;
 }
 
 export function TopicListItem({ topic }: TopicListItemProps) {
-  const [likes, setLikes] = useState(topic.upvote);
-  const [dislikes, setDislikes] = useState(topic.downvote);
-  const [totalVotes, setTotalVotes] = useState(0);
+  const [likeState, LikeDispatch] = useReducer(voteReducer, { voteCount: topic.upvote })
+  const [dislikeState, DislikeDispatch] = useReducer(voteReducer, { voteCount: topic.downvote })
+  const [totalVotes, totalVotesDispatch] = useReducer(voteReducer, { voteCount: 0 })
 
+  // Increase the like count for this topic.
   const handleLikes = () => {
-    setLikes(likes + 1);
-    setTotalVotes(totalVotes + 1);
+    LikeDispatch({ type: ActionType.Like, payload: { topic } })
+    totalVotesDispatch({ type: ActionType.AddTotalVotes, payload: { topic } })
   };
 
+  // Increase the dislike count for this topic.
   const handleDislike = () => {
-    setDislikes(dislikes + 1);
-    setTotalVotes(totalVotes + 1);
+    DislikeDispatch({ type: ActionType.Dislike, payload: { topic } })
+    totalVotesDispatch({ type: ActionType.AddTotalVotes, payload: { topic } })
   };
 
   return (
@@ -35,9 +38,9 @@ export function TopicListItem({ topic }: TopicListItemProps) {
         />
         <meter
           id="votes_progress"
-          value={likes}
-          max={totalVotes}
-          className={styles.meter}
+          value={likeState.voteCount}
+          max={totalVotes.voteCount}
+          className={styles.votes_progress_bar}
         ></meter>
         <input
           type="button"
