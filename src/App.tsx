@@ -1,31 +1,14 @@
-import { useState } from "react";
-import { ulid } from "ulidx";
+import { useReducer } from "react";
 import "./App.css";
 import { TopicForm } from "./components/TopicForm";
 import { TopicList } from "./components/TopicList";
-import { Topic } from "./core/interfaces/Topic";
+import { ActionType, TopicsReducer } from "./core/reducers/TopicsReducer";
 
 function App() {
-  const [topics, setTopics] = useState<Topic[]>([]);
+  const [topicsState, dispatch] = useReducer(TopicsReducer, {topics: []})
 
   const onAddTopic = (description: string) => {
-    const new_topic: Topic = {
-      id: ulid(),
-      created_at: new Date().toJSON().slice(0, 10),
-      active: true,
-      description: description,
-      upvote: 0,
-      downvote: 0,
-      tags: ["teste", "teste2"],
-      autor: {
-        id: "id_teste",
-        name: "Kelson",
-        country: "Brazil",
-        city: "Teresina",
-      },
-    };
-
-    setTopics([new_topic, ...topics]);
+    dispatch({type: ActionType.Added, payload: {description}})
   };
 
   return (
@@ -35,7 +18,7 @@ function App() {
       </header>
       <main>
         <TopicForm onAddTopic={onAddTopic}/>
-        <TopicList topics={topics}/>
+        <TopicList topics={topicsState.topics}/>
       </main>
       <footer>
         <p>Thanks for reading, hope see you soon</p>
