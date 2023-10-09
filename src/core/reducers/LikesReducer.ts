@@ -4,10 +4,12 @@ export interface voteState {
      voteCount: number;
 }
 
+
 export enum ActionType {
-     Like,
-     Dislike,
-     AddTotalVotes,
+  Like,
+  Dislike,
+  AddTotalVotes,
+  Added
 }
 
 type LikedAction = {

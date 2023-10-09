@@ -1,4 +1,3 @@
-import { ulid } from "ulidx";
 import { Topic } from "../interfaces/Topic";
 
 export interface TopicState {
@@ -13,9 +12,11 @@ export enum ActionType {
 type TopicAdded = { type: ActionType.Added, payload: { topic: Topic } }
 type TopicLoaded = { type: ActionType.Loaded, payload: { topics: Topic[] } }
 
-type Action = TopicAdded | TopicLoaded
+export type Action = TopicAdded | TopicLoaded
 
 const TopicsReducer = (state: TopicState, action: Action): TopicState => {
+     console.table(action)
+     
      switch (action.type) {
           case ActionType.Added: {
                return { topics: [action.payload.topic, ...state.topics] }
