@@ -215,6 +215,24 @@
         "tag1",
         "tag2"
       ]
+    },
+    {
+      "id": "01HCFZ2AZ9HEF05W0X3YKJ9K7F",
+      "description": "Teste de loader",
+      "created_at": "2023-10-11T18:13:01.033Z",
+      "upvote": 0,
+      "downvote": 0,
+      "autor": {
+        "id": "id_teste",
+        "name": "Kelson",
+        "city": "Teresina",
+        "country": "Brazil"
+      },
+      "active": true,
+      "tags": [
+        "tag1",
+        "tag2"
+      ]
     }
   ]
 }

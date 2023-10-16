@@ -2,21 +2,20 @@ import styles from "./styles.module.css";
 import { TopicListItem } from "../TopicListItem";
 import { useTopics } from "../../core/hooks/useTopics";
 import { Topic } from "../../core/interfaces/Topic";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { ActionType } from "../../core/reducers/TopicsReducer";
-import { fetchAllTopics } from "../../providers/api";
-import { TopicsDispatchContext } from "../../core/contexts/TopicsDispatchContext";
+import { useLoaderData } from "react-router-dom";
+import { useTopicsDispatch } from "../../core/hooks/useTopicsDispatch";
 
 export function TopicList() {
   const topics = useTopics()
-  const dispatch = useContext(TopicsDispatchContext)
+  const data = useLoaderData()
+  const dispatch = useTopicsDispatch()
 
   useEffect(() => {
     (
       async () => {
-
-        const topics = await fetchAllTopics();
-
+        const topics = data as Topic[];
         dispatch({ type: ActionType.Loaded, payload: { topics } });
       }
     )()

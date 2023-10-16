@@ -1,26 +1,24 @@
-import './App.css';
-import { TopicForm } from './components/TopicForm';
-import { TopicList } from './components/TopicList';
-import { TopicsProvider } from './core/providers/TopicsProviders';
+import { Outlet } from "react-router-dom";
+import "./App.css";
+import { TopicsProvider } from "./core/providers/TopicsProviders";
+import { AuthProvider } from "./core/providers/AuthProvider";
 
-function App() {
-
+function Root() {
   return (
     <>
       <TopicsProvider>
-        <header>
-          <h1>Welcome to our topic social media</h1>
-        </header>
-        <main>
-          <TopicForm />
-          <TopicList />
-        </main>
-        <footer>
-          <p>Thanks for reading, hope see you soon</p>
-        </footer>
+        <AuthProvider>
+          <header>
+            <h1>Welcome to our topic social media</h1>
+          </header>
+          <Outlet />
+          <footer>
+            <p>Thanks for reading, hope see you soon</p>
+          </footer>
+        </AuthProvider>
       </TopicsProvider>
     </>
   );
 }
 
-export default App;
+export default Root;
